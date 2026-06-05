@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Las Leyes de Newton</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="screen-home" class="screen active">
+    <div class="home-bg">
+      <div class="particle" style="--x:10%;--y:20%;--s:6px;--d:4s;--delay:0s"></div>
+      <div class="particle" style="--x:85%;--y:15%;--s:4px;--d:6s;--delay:1s"></div>
+      <div class="particle" style="--x:70%;--y:70%;--s:8px;--d:5s;--delay:2s"></div>
+      <div class="particle" style="--x:25%;--y:80%;--s:5px;--d:7s;--delay:0.5s"></div>
+    </div>
+
+    <div class="home-content">
+      <div class="home-badge">Física Clásica</div>
+      <h1 class="home-title">
+        <span class="title-line">Las Leyes</span>
+        <span class="title-line accent">de Newton</span>
+      </h1>
+      <p class="home-subtitle">Simulaciones Interactivas de Física</p>
+
+      <div class="law-cards">
+        <div class="law-card" id="card-1">
+          <div class="card-number">I</div>
+          <h2 class="card-title">Primera Ley</h2>
+          <p class="card-law">Inercia</p>
+          <p class="card-desc">Un cuerpo permanece en su estado de reposo o movimiento uniforme a menos que actúe una fuerza externa.</p>
+          <button class="btn-launch" onclick="showSimulation(1)">Iniciar Simulación →</button>
+        </div>
+
+        <div class="law-card" id="card-2">
+          <div class="card-number">II</div>
+          <h2 class="card-title">Segunda Ley</h2>
+          <p class="card-law">Fuerza y Aceleración</p>
+          <p class="card-desc">La aceleración de un objeto es directamente proporcional a la fuerza neta e inversamente proporcional a su masa.</p>
+          <button class="btn-launch" onclick="showSimulation(2)">Iniciar Simulación →</button>
+        </div>
+
+        <div class="law-card" id="card-3">
+          <div class="card-number">III</div>
+          <h2 class="card-title">Tercera Ley</h2>
+          <p class="card-law">Acción y Reacción</p>
+          <p class="card-desc">Cuando un cuerpo ejerce una fuerza sobre otro, este ejerce una fuerza de igual magnitud y sentido contrario.</p>
+          <button class="btn-launch" onclick="showSimulation(3)">Iniciar Simulación →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-sim1" class="screen sim-screen">
+    <div class="sim-header">
+      <button class="btn-back" onclick="showHome()">← Volver</button>
+      <div class="sim-header-info">
+        <span class="sim-law-num">I</span>
+        <div>
+          <h2 class="sim-title">Primera Ley de Newton</h2>
+          <p class="sim-subtitle">Principio de Inercia en Espacio Continuo</p>
+        </div>
+      </div>
+      <button class="btn-theory" onclick="openModal(1)">📘 Explicación Científica</button>
+    </div>
+    <div class="sim-body">
+      <div class="canvas-wrapper">
+        <canvas id="canvas1"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="info-box" id="info1">
+          <div class="info-icon">💡</div>
+          <p id="info1-text">Aplica un impulso. Si la fricción es cero, el cuerpo mantendrá su velocidad de forma infinita.</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-label">Velocidad (v)</span>
+            <span class="metric-value text-green" id="s1-speed">0.00 m/s</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Coef. Fricción (μ)</span>
+            <span class="metric-value text-amber" id="s1-friction-val">0.00</span>
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <p class="group-title">Modificar Parámetros</p>
+          <div class="slider-wrapper">
+            <label>Fuerza del Impulso: <span id="lbl-s1-force">40</span> N</label>
+            <input type="range" id="slider-s1-force" min="10" max="100" value="40" oninput="updateSim1Values()" />
+          </div>
+          <div class="slider-wrapper">
+            <label>Masa del Cuerpo: <span id="lbl-s1-mass">5</span> kg</label>
+            <input type="range" id="slider-s1-mass" min="1" max="15" value="5" oninput="updateSim1Values()" />
+          </div>
+          <div class="slider-wrapper">
+            <label>Fricción de la Superficie (μ): <span id="lbl-s1-friction">0.00</span></label>
+            <input type="range" id="slider-s1-friction" min="0" max="10" value="0" step="1" oninput="updateSim1Values()" />
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <button class="btn-sim btn-primary" onclick="applyForce1()">🚀 Aplicar Impulso Inicial</button>
+          <button class="btn-sim btn-ghost" onclick="resetSim1()">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-sim2" class="screen sim-screen">
+    <div class="sim-header">
+      <button class="btn-back" onclick="showHome()">← Volver</button>
+      <div class="sim-header-info">
+        <span class="sim-law-num">II</span>
+        <div>
+          <h2 class="sim-title">Segunda Ley de Newton</h2>
+          <p class="sim-subtitle">Ley Fundamental de la Dinámica</p>
+        </div>
+      </div>
+      <button class="btn-theory" onclick="openModal(2)">📘 Explicación Científica</button>
+    </div>
+    <div class="sim-body">
+      <div class="canvas-wrapper">
+        <canvas id="canvas2"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="legend-box">
+          <p class="legend-title">🗺️ Leyenda de Vectores</p>
+          <div class="legend-item"><span class="legend-dot blue"></span> <strong>Bloque:</strong> Masa del objeto (m)</div>
+          <div class="legend-item"><span class="legend-dot amber"></span> <strong>Flecha Naranja (F):</strong> Fuerza Neta constante aplicada</div>
+          <div class="legend-item"><span class="legend-dot green"></span> <strong>Flecha Verde (v):</strong> Vector Velocidad Instantánea</div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-label">Fuerza (F)</span>
+            <span class="metric-value text-amber" id="s2-force">20 N</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Masa (m)</span>
+            <span class="metric-value text-blue" id="s2-mass">5 kg</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Aceleración (a)</span>
+            <span class="metric-value text-purple" id="s2-accel">4.00 m/s²</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Velocidad (v)</span>
+            <span class="metric-value text-green" id="s2-speed-val">0.00 m/s</span>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-title">Cálculo Dinámico (F = m · a)</p>
+          <div id="formula-display2" class="formula-text-dynamic"></div>
+        </div>
+
+        <div class="controls-group">
+          <p class="group-title">Modificar Parámetros</p>
+          <div class="slider-wrapper">
+            <label>Fuerza Aplicada: <span id="lbl-force">20</span> N</label>
+            <input type="range" id="slider-force" min="0" max="50" value="20" oninput="updateSim2Values()" />
+          </div>
+          <div class="slider-wrapper">
+            <label>Masa del Bloque: <span id="lbl-mass">5</span> kg</label>
+            <input type="range" id="slider-mass" min="1" max="10" value="5" oninput="updateSim2Values()" />
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <button class="btn-sim btn-primary" id="btn-start2" onclick="startSim2()">▶ Iniciar Simulación</button>
+          <button class="btn-sim btn-ghost" onclick="resetSim2()">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-sim3" class="screen sim-screen">
+    <div class="sim-header">
+      <button class="btn-back" onclick="showHome()">← Volver</button>
+      <div class="sim-header-info">
+        <span class="sim-law-num">III</span>
+        <div>
+          <h2 class="sim-title">Tercera Ley de Newton</h2>
+          <p class="sim-subtitle">Principio de Acción y Reacción</p>
+        </div>
+      </div>
+      <button class="btn-theory" onclick="openModal(3)">📘 Explicación Científica</button>
+    </div>
+    <div class="sim-body">
+      <div class="canvas-wrapper">
+        <canvas id="canvas3"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="legend-box">
+          <p class="legend-title">🗺️ Leyenda del Choque</p>
+          <div class="legend-item"><span class="legend-dot blue"></span> <strong>Bloque A:</strong> Cuerpo impulsor izquierdo</div>
+          <div class="legend-item"><span class="legend-dot coral"></span> <strong>Bloque B:</strong> Cuerpo de reacción derecho</div>
+          <div class="legend-item"><span class="legend-dot purple"></span> <strong>Vectores superiores:</strong> Fuerzas de impacto instantáneas</div>
+        </div>
+
+        <div class="action-reaction-display">
+          <div class="ar-block blue">
+            <span class="ar-label">Fuerza en A (F_BA)</span>
+            <span class="ar-force" id="ar-force-a">—</span>
+          </div>
+          <div class="ar-vs">⇄</div>
+          <div class="ar-block coral">
+            <span class="ar-label">Fuerza en B (F_AB)</span>
+            <span class="ar-force" id="ar-force-b">—</span>
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <p class="group-title">Modificar Parámetros de Masas</p>
+          <div class="slider-wrapper">
+            <label>Masa Bloque A: <span id="lbl-s3-massA">4</span> kg</label>
+            <input type="range" id="slider-s3-massA" min="1" max="10" value="4" oninput="updateSim3Values()" />
+          </div>
+          <div class="slider-wrapper">
+            <label>Masa Bloque B: <span id="lbl-s3-massB">4</span> kg</label>
+            <input type="range" id="slider-s3-massB" min="1" max="10" value="4" oninput="updateSim3Values()" />
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <button class="btn-sim btn-primary" id="btn-start3" onclick="triggerCollision()">💥 Generar Colisión</button>
+          <button class="btn-sim btn-ghost" onclick="resetSim3()">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="theory-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h3 id="modal-title" class="modal-title">Título de la Ley</h3>
+      <div id="modal-content" class="modal-content">Contenido explicativo...</div>
+      <button class="btn-sim btn-primary" style="margin-top: 1.5rem;" onclick="closeModal()">Entendido, volver al simulador</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
