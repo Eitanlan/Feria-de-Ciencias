@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- ===== PANTALLA DE INICIO ===== -->
   <div id="screen-home" class="screen active">
     <div class="home-bg">
       <div class="particle" style="--x:10%;--y:20%;--s:6px;--d:4s;--delay:0s"></div>
@@ -28,8 +27,6 @@
       <p class="home-subtitle">Simulaciones Interactivas de Física</p>
 
       <div class="law-cards">
-
-        <!-- Ley 1 -->
         <div class="law-card" id="card-1">
           <div class="card-number">I</div>
           <div class="card-icon">
@@ -43,14 +40,10 @@
           </div>
           <h2 class="card-title">Primera Ley</h2>
           <p class="card-law">Inercia</p>
-          <p class="card-desc">Un cuerpo en reposo permanece en reposo; en movimiento, continúa moviéndose.</p>
-          <button class="btn-launch" onclick="showSimulation(1)">
-            Iniciar Simulación
-            <span class="btn-arrow">→</span>
-          </button>
+          <p class="card-desc">Un cuerpo en reposo permanece en reposo; en movimiento, continúa moviéndose infinitamente.</p>
+          <button class="btn-launch" onclick="showSimulation(1)">Iniciar Simulación <span class="btn-arrow">→</span></button>
         </div>
 
-        <!-- Ley 2 -->
         <div class="law-card" id="card-2">
           <div class="card-number">II</div>
           <div class="card-icon">
@@ -58,19 +51,14 @@
               <rect x="8" y="28" width="32" height="8" rx="2" fill="currentColor" opacity="0.15"/>
               <rect x="14" y="20" width="14" height="14" rx="2" fill="currentColor" opacity="0.9"/>
               <text x="24" y="6" fill="currentColor" font-size="9" font-weight="700" text-anchor="middle" font-family="Georgia, serif">F=ma</text>
-              <line x1="8" y1="24" x2="8" y2="24"/>
             </svg>
           </div>
           <h2 class="card-title">Segunda Ley</h2>
           <p class="card-law">Fuerza y Aceleración</p>
           <p class="card-desc">La fuerza neta es igual a la masa por la aceleración: <em>F = m × a</em></p>
-          <button class="btn-launch" onclick="showSimulation(2)">
-            Iniciar Simulación
-            <span class="btn-arrow">→</span>
-          </button>
+          <button class="btn-launch" onclick="showSimulation(2)">Iniciar Simulación <span class="btn-arrow">→</span></button>
         </div>
 
-        <!-- Ley 3 -->
         <div class="law-card" id="card-3">
           <div class="card-number">III</div>
           <div class="card-icon">
@@ -79,24 +67,18 @@
               <rect x="8" y="20" width="10" height="10" rx="2" fill="currentColor" opacity="0.9"/>
               <rect x="30" y="20" width="10" height="10" rx="2" fill="currentColor" opacity="0.6"/>
               <line x1="22" y1="25" x2="28" y2="25" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <line x1="14" y1="25" x2="8" y2="25" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
             </svg>
           </div>
           <h2 class="card-title">Tercera Ley</h2>
           <p class="card-law">Acción y Reacción</p>
           <p class="card-desc">A toda acción le corresponde una reacción igual y de sentido contrario.</p>
-          <button class="btn-launch" onclick="showSimulation(3)">
-            Iniciar Simulación
-            <span class="btn-arrow">→</span>
-          </button>
+          <button class="btn-launch" onclick="showSimulation(3)">Iniciar Simulación <span class="btn-arrow">→</span></button>
         </div>
+      </div>
+    </div>
+  </div>
 
-      </div><!-- /.law-cards -->
-    </div><!-- /.home-content -->
-  </div><!-- /#screen-home -->
 
-
-  <!-- ===== SIMULACIÓN 1: INERCIA ===== -->
   <div id="screen-sim1" class="screen sim-screen">
     <div class="sim-header">
       <button class="btn-back" onclick="showHome()">← Volver</button>
@@ -104,53 +86,53 @@
         <span class="sim-law-num">I</span>
         <div>
           <h2 class="sim-title">Primera Ley de Newton</h2>
-          <p class="sim-subtitle">Principio de Inercia</p>
+          <p class="sim-subtitle">Principio de Inercia (Espacio Infinito)</p>
         </div>
       </div>
     </div>
-
     <div class="sim-body">
       <div class="canvas-wrapper">
         <canvas id="canvas1"></canvas>
       </div>
-
       <div class="sim-panel">
         <div class="info-box" id="info1">
           <div class="info-icon">💡</div>
-          <p id="info1-text">Aplica una fuerza al bloque para ver la Primera Ley en acción.</p>
+          <p id="info1-text">Aplica un impulso. Sin fricción, el bloque se moverá por el espacio de manera perpetua e infinita.</p>
         </div>
 
-        <div class="status-row">
-          <div class="status-chip">
-            <span class="chip-label">Velocidad</span>
-            <span class="chip-value" id="s1-speed">0 m/s</span>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-label">Velocidad</span>
+            <span class="metric-value" id="s1-speed">0.00 m/s</span>
           </div>
-          <div class="status-chip">
-            <span class="chip-label">Fricción</span>
-            <span class="chip-value" id="s1-friction">Sin fricción</span>
-          </div>
-          <div class="status-chip">
-            <span class="chip-label">Estado</span>
-            <span class="chip-value" id="s1-state">En reposo</span>
+          <div class="metric-card">
+            <span class="metric-label">Fricción</span>
+            <span class="metric-value text-amber" id="s1-friction">Sin fricción</span>
           </div>
         </div>
 
         <div class="controls-group">
-          <button class="btn-sim btn-primary" onclick="applyForce1()">⚡ Aplicar Fuerza</button>
-          <button class="btn-sim btn-secondary" id="btn-friction" onclick="toggleFriction1()">🏔️ Agregar Fricción</button>
-          <button class="btn-sim btn-ghost" onclick="resetSim1()">↺ Reiniciar</button>
+          <p class="group-title">Modificar Parámetros</p>
+          <div class="slider-wrapper">
+            <label>Fuerza del Impulso: <span id="lbl-s1-force">40</span> N</label>
+            <input type="range" id="slider-s1-force" min="10" max="100" value="40" oninput="updateSim1Values()" />
+          </div>
+          <div class="slider-wrapper">
+            <label>Masa del Cuerpo: <span id="lbl-s1-mass">5</span> kg</label>
+            <input type="range" id="slider-s1-mass" min="1" max="15" value="5" oninput="updateSim1Values()" />
+          </div>
         </div>
 
-        <div class="formula-box">
-          <p class="formula-title">Ley de Inercia</p>
-          <p class="formula-text">"Todo cuerpo persiste en su estado de reposo o movimiento uniforme rectilíneo a menos que una fuerza actúe sobre él."</p>
+        <div class="controls-group">
+          <button class="btn-sim btn-primary" onclick="applyForce1()">🚀 Aplicar Impulso Inicial</button>
+          <button class="btn-sim id-accent" id="btn-friction" onclick="toggleFriction1()">🏔️ Agregar Fricción</button>
+          <button class="btn-sim btn-ghost" onclick="resetSim1()">↺ Reiniciar</button>
         </div>
       </div>
     </div>
   </div>
 
 
-  <!-- ===== SIMULACIÓN 2: F = m × a ===== -->
   <div id="screen-sim2" class="screen sim-screen">
     <div class="sim-header">
       <button class="btn-back" onclick="showHome()">← Volver</button>
@@ -158,57 +140,57 @@
         <span class="sim-law-num">II</span>
         <div>
           <h2 class="sim-title">Segunda Ley de Newton</h2>
-          <p class="sim-subtitle">F = m × a</p>
+          <p class="sim-subtitle">Fuerza, Masa y Aceleración</p>
         </div>
       </div>
     </div>
-
     <div class="sim-body">
       <div class="canvas-wrapper">
         <canvas id="canvas2"></canvas>
       </div>
-
       <div class="sim-panel">
+        
+        <div class="legend-box">
+          <p class="legend-title">🗺️ Leyenda del Simulador</p>
+          <div class="legend-item"><span class="legend-dot blue"></span> <strong>Bloque:</strong> Masa bajo estudio ($m$)</div>
+          <div class="legend-item"><span class="legend-dot amber"></span> <strong>Flecha Naranja:</strong> Vector Fuerza Aplicada ($\vec{F}$)</div>
+          <div class="legend-item"><span class="legend-dot green"></span> <strong>Flecha Verde:</strong> Vector Velocidad ($\vec{v}$)</div>
+        </div>
+
         <div class="metrics-grid">
-          <div class="metric-card blue">
+          <div class="metric-card">
             <span class="metric-label">Fuerza (F)</span>
-            <span class="metric-value" id="s2-force">10 N</span>
+            <span class="metric-value text-blue" id="s2-force">20 N</span>
           </div>
-          <div class="metric-card amber">
+          <div class="metric-card">
             <span class="metric-label">Masa (m)</span>
-            <span class="metric-value" id="s2-mass">5 kg</span>
+            <span class="metric-value text-amber" id="s2-mass">5 kg</span>
           </div>
-          <div class="metric-card green">
-            <span class="metric-label">Aceleración (a)</span>
-            <span class="metric-value" id="s2-accel">2.0 m/s²</span>
-          </div>
-          <div class="metric-card purple">
-            <span class="metric-label">Velocidad</span>
-            <span class="metric-value" id="s2-speed">0.0 m/s</span>
+          <div class="metric-card full-width">
+            <span class="metric-label">Aceleración Resultante (a)</span>
+            <span class="metric-value text-green" id="s2-accel">4.00 m/s²</span>
           </div>
         </div>
 
-        <div class="slider-group">
-          <div class="slider-row">
-            <label class="slider-label">Fuerza: <strong id="lbl-force">10</strong> N</label>
-            <input type="range" id="slider-force" min="1" max="50" value="10" oninput="updateSim2Values()" />
-          </div>
-          <div class="slider-row">
-            <label class="slider-label">Masa: <strong id="lbl-mass">5</strong> kg</label>
-            <input type="range" id="slider-mass" min="1" max="20" value="5" oninput="updateSim2Values()" />
-          </div>
-        </div>
-
-        <div class="formula-display" id="formula-display2">
-          <span class="fd-part blue">F = 10 N</span>
-          <span class="fd-eq">=</span>
-          <span class="fd-part amber">m = 5 kg</span>
-          <span class="fd-times">×</span>
-          <span class="fd-part green">a = 2.0 m/s²</span>
+        <div class="formula-box">
+          <p class="formula-title">Ecuación Fundamental</p>
+          <div id="formula-display2" class="formula-text-dynamic"></div>
         </div>
 
         <div class="controls-group">
-          <button class="btn-sim btn-primary" onclick="runSim2()">⚡ Aplicar Fuerza</button>
+          <p class="group-title">Modificar Parámetros</p>
+          <div class="slider-wrapper">
+            <label>Fuerza Aplicada: <span id="lbl-force">20</span> N</label>
+            <input type="range" id="slider-force" min="0" max="50" value="20" oninput="updateSim2Values()" />
+          </div>
+          <div class="slider-wrapper">
+            <label>Masa del Bloque: <span id="lbl-mass">5</span> kg</label>
+            <input type="range" id="slider-mass" min="1" max="10" value="5" oninput="updateSim2Values()" />
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <button class="btn-sim btn-primary" id="btn-start2" onclick="startSim2()">▶ Iniciar Simulación</button>
           <button class="btn-sim btn-ghost" onclick="resetSim2()">↺ Reiniciar</button>
         </div>
       </div>
@@ -216,7 +198,6 @@
   </div>
 
 
-  <!-- ===== SIMULACIÓN 3: ACCIÓN Y REACCIÓN ===== -->
   <div id="screen-sim3" class="screen sim-screen">
     <div class="sim-header">
       <button class="btn-back" onclick="showHome()">← Volver</button>
@@ -224,11 +205,10 @@
         <span class="sim-law-num">III</span>
         <div>
           <h2 class="sim-title">Tercera Ley de Newton</h2>
-          <p class="sim-subtitle">Acción y Reacción</p>
+          <p class="sim-subtitle">Principio de Acción y Reacción</p>
         </div>
       </div>
     </div>
-
     <div class="sim-body">
       <div class="canvas-wrapper">
         <canvas id="canvas3"></canvas>
@@ -237,20 +217,30 @@
       <div class="sim-panel">
         <div class="info-box" id="info3">
           <div class="info-icon">💡</div>
-          <p id="info3-text">Presiona "Colisión" para ver cómo los dos bloques ejercen fuerzas iguales y opuestas.</p>
+          <p id="info3-text">Configura las masas de ambos bloques y presiona "Colisión" para analizar cómo se transfieren fuerzas iguales en sentidos opuestos.</p>
         </div>
 
         <div class="action-reaction-display">
           <div class="ar-block blue">
             <span class="ar-label">Bloque A</span>
             <span class="ar-force" id="ar-force-a">—</span>
-            <span class="ar-type" id="ar-type-a">—</span>
           </div>
           <div class="ar-vs">⇄</div>
           <div class="ar-block coral">
             <span class="ar-label">Bloque B</span>
             <span class="ar-force" id="ar-force-b">—</span>
-            <span class="ar-type" id="ar-type-b">—</span>
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <p class="group-title">Modificar Parámetros de Masas</p>
+          <div class="slider-wrapper">
+            <label>Masa Bloque A: <span id="lbl-s3-massA">4</span> kg</label>
+            <input type="range" id="slider-s3-massA" min="1" max="10" value="4" oninput="updateSim3Values()" />
+          </div>
+          <div class="slider-wrapper">
+            <label>Masa Bloque B: <span id="lbl-s3-massB">4</span> kg</label>
+            <input type="range" id="slider-s3-massB" min="1" max="10" value="4" oninput="updateSim3Values()" />
           </div>
         </div>
 
@@ -261,13 +251,11 @@
 
         <div class="formula-box">
           <p class="formula-title">Tercera Ley de Newton</p>
-          <p class="formula-text">"Si el cuerpo A ejerce una fuerza sobre el cuerpo B, entonces B ejerce una fuerza igual y opuesta sobre A."</p>
-          <p class="formula-math">F<sub>A→B</sub> = −F<sub>B→A</sub></p>
+          <p class="formula-text">"Si el cuerpo A ejerce una fuerza sobre el cuerpo B ($\vec{F}_{AB}$), entonces B ejerce una fuerza igual y opuesta sobre A ($\vec{F}_{BA} = -\vec{F}_{AB}$)."</p>
         </div>
       </div>
     </div>
   </div>
-
 
   <script src="script.js"></script>
 </body>
