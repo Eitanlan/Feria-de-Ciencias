@@ -1,0 +1,25 @@
+{
+  "name": "feria-de-ciencias",
+  "version": "1.0.0",
+  "description": "Si lees esto estas en el repo",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eitanlan/Feria-de-Ciencias.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eitanlan/Feria-de-Ciencias/issues"
+  },
+  "homepage": "https://github.com/Eitanlan/Feria-de-Ciencias#readme",
+  "devDependencies": {
+    "vite": "^8.0.16"
+  }
+}
